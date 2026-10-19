@@ -14,25 +14,28 @@ public class EventosService {
     private EventoRepository eventoRepository;
 
     public EventoResponseDTO obtenerPorId(Long id) {
-        // 1. Buscamos el evento en la base de datos
+        // 1. Buscamos el evento en la base de datos usando el repositorio
         Evento evento = eventoRepository.findById(id).orElse(null);
 
         if (evento == null) {
             return null;
         }
 
-        // 2. Como EventoResponseDTO es un record, lo instanciamos con el constructor
-        // (Ajusta los campos en orden según cómo tengas definido tu EventoResponseDTO)
+        // 2. Mapeamos convirtiendo los IDs de Integer a Long de forma segura con .longValue()
         return new EventoResponseDTO(
-                evento.getIdEvento(),
+                evento.getId() != null ? evento.getId().longValue() : null,
                 evento.getTitulo(),
                 evento.getDescripcion(),
-                evento.getEstado()
-                // Añade el resto de campos que requiera el constructor de tu EventoResponseDTO
+                evento.getEstado(),
+                evento.getFechaIni(),
+                evento.getFechafin(),
+                evento.getCategoria() != null && evento.getCategoria().getId() != null ? evento.getCategoria().getId().longValue() : null,
+                evento.getLugar() != null && evento.getLugar().getId() != null ? evento.getLugar().getId().longValue() : null
         );
     }
 
     public EventoResponseDTO crearEvento(EventoRequestDTO requestDTO) {
+        // Lógica de creación si la necesitas más adelante
         return null;
     }
 }

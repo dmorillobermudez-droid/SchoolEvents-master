@@ -1,15 +1,14 @@
 package es.safareyes.schoolevents.DTO;
 
-import lombok.Data;
 import java.time.LocalDateTime;
 
-@Data
-public class EventoResponseDTO { //salida
-    private Long id;
-    private String titulo;
-    private String descripcion;
-    private LocalDateTime fechaInicio;
-    private LocalDateTime fechaFin;
-    private String categoriaNombre;
-    private String lugarNombre;
-}
+public record EventoResponseDTO(
+        Long idEvento,
+        String titulo,
+        String descripcion,
+        String estado,
+        LocalDateTime fechaInicio,
+        LocalDateTime fechaFin,
+        Long categoriaId,
+        Long lugarId
+) {}
